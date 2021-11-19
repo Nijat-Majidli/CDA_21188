@@ -1,0 +1,33 @@
+CREATE TABLE Client(
+   client_id INT,
+   client_nom VARCHAR(50) NOT NULL,
+   client_prénom VARCHAR(50) NOT NULL,
+   PRIMARY KEY(client_id)
+);
+
+CREATE TABLE Commande(
+   commande_id INT,
+   commande_date DATE NOT NULL,
+   commande_montant DECIMAL(5,2),
+   client_id INT NOT NULL,
+   PRIMARY KEY(commande_id),
+   FOREIGN KEY(client_id) REFERENCES Client(client_id)
+);
+
+CREATE TABLE Article(
+   article_id INT,
+   article_designation VARCHAR(50) NOT NULL,
+   article_prix DECIMAL(4,2) NOT NULL,
+   PRIMARY KEY(article_id)
+);
+
+CREATE TABLE SeComposeDe(
+   commande_id INT,
+   article_id INT,
+   Quantité INT,
+   TauxTVA DECIMAL(2,2),
+   PRIMARY KEY(commande_id, article_id),
+   FOREIGN KEY(commande_id) REFERENCES Commande(commande_id),
+   FOREIGN KEY(article_id) REFERENCES Article(article_id)
+);
+
