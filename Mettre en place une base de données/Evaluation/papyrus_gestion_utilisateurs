@@ -1,0 +1,8 @@
+CREATE USER 'util1'@'%' IDENTIFIED BY 'afpa1';
+CREATE USER 'util2'@'%' IDENTIFIED BY 'afpa2';
+CREATE USER 'util3'@'%' IDENTIFIED BY 'afpa3';
+
+
+GRANT ALL PRIVILEGES ON papyrus.* TO 'util1'@'%';
+GRANT select ON papyrus.* TO 'util2'@'%';
+GRANT select ON papyrus.fournis TO 'util3'@'%';
