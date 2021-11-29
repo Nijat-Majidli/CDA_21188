@@ -109,20 +109,19 @@ SELECT CONCAT(nom, ' ', prenom) AS Nom_Prenom FROM employe;
 
 
 --29. Afficher les 5 premières lettres du nom des employés.
-SELECT SUBSTRING(SELECT nom FROM employe, 1, 5) AS Name_First_5_letters;
-
+SELECT SUBSTRING(nom, 1, 5) AS Name_First_5_letters FROM employe;
 
 
 --30. Afficher le nom et le rang de la lettre « r » dans le nom des employés.
-
+SELECT nom, INSTR(nom, 'r') AS Rang_lettre_r FROM employe WHERE nom LIKE '%r%'
 
 
 --31. Afficher le nom, le nom en majuscule et le nom en minuscule de l'employé dont le nom est Vrante.
-
+SELECT UPPER(nom) AS nom_majuscule, LOWER(nom) AS nom_minuscule FROM employe WHERE nom='Vrante';
 
 
 --32. Afficher le nom et le nombre de caractères du nom des employés. 
-
+SELECT nom, LENGTH(nom) AS nombre_caractères FROM employe;
 
 
 
