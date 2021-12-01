@@ -146,12 +146,15 @@ ON produit.codart=ligcom.codart
 WHERE produit.qteann*0.9 < ligcom.qtecde
 
 
-19. Calculer le chiffre d'affaire par fournisseur pour l'année 93 sachant que les prix indiqués sont hors taxes et que le taux de TVA est 20%.
+19. Calculer le chiffre d'affaire par fournisseur pour l'année 2007 sachant que les prix indiqués sont hors taxes et que le taux de TVA est 20%.
+SELECT SUM(qtecde*priuni*1.2) AS `Chiffre d'Affaire`, nomfou AS Fournisseur  
+FROM ligcom 
+JOIN entcom
+ON ligcom.numcom=entcom.numcom
+JOIN fournis
+ON fournis.numfou=entcom.numfou
+WHERE YEAR(derliv)=2007
+GROUP BY nomfou;
 
-
-/*
-
-
-20. Existe-t-il des lignes de commande non cohérentes avec les produits vendus par les fournisseurs. ?
 
 
