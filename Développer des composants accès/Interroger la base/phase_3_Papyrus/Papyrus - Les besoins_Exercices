@@ -1,3 +1,6 @@
+III LES BESOINS D’AFFICHAGE
+
+
 1. Quelles sont les commandes du fournisseur 9120 ?
 SELECT numcom AS Commande, numfou AS Fournisseur FROM entcom WHERE numfou=9120;
 
