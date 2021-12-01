@@ -1,0 +1,25 @@
+Exercice 3 : création d'une procédure stockée avec Plusieurs Paramètres
+
+
+1.Créer la procédure stockée CA_Fournisseur, qui pour un code fournisseur et une année entrée en paramètre, calcule et restitue le CA potentiel de ce fournisseur pour l'année souhaitée 
+(cette requête sera construite à partir de la requête n°19).
+DELIMITER |
+CREATE PROCEDURE CA_Fournisseur(IN p_numfou INT(11), p_anne INT(4))
+BEGIN
+   	SELECT SUM(qtecde*priuni*1.2) AS `Chiffre d'Affaire`, numfou AS `Numéro fournisseur`  
+	FROM ligcom 
+	JOIN entcom
+	ON ligcom.numcom=entcom.numcom
+	WHERE YEAR(derliv)=p_anne
+	AND entcom.numfou=p_numfou;
+END |
+DELIMITER ;
+
+
+
+
+
+2.On exécutera la requête que si le code fournisseur est valide, c'est-à-dire dans la table FOURNIS.
+
+
+3.Testez cette procédure avec différentes valeurs des paramètres.

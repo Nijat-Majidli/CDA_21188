@@ -54,7 +54,7 @@ GROUP BY nomfou;
 
 11. Sortir les produits des commandes ayant le mot "urgent' en observation ?
 (Afficher le numéro de commande, le nom du fournisseur, le libellé du produit et le sous total = quantité commandée * Prix unitaire)
-SELECT entcom.numcom, fournis.nomfou AS Fournisseur, produit.libart AS Produit, entcom.obscom, SUM(qtecde*priuni) AS Total 
+SELECT entcom.numcom AS Commande, fournis.nomfou AS Fournisseur, produit.libart AS Produit, entcom.obscom AS Observation, SUM(qtecde*priuni) AS Total 
 FROM fournis 
 JOIN entcom 
 ON fournis.numfou=entcom.numfou 

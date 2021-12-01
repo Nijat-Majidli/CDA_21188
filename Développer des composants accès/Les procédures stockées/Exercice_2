@@ -1,0 +1,20 @@
+Exercice 2 : création d'une procédure stockée avec un Paramètre en Entrée
+
+1.Créer la procédure stockée Lst_Commandes, qui liste les commandes ayant un libellé particulier dans le champ obscom 
+(cette requête sera construite à partir de la requête n°11).
+
+DELIMITER |
+CREATE PROCEDURE Lst_Commandes(IN p_libelle VARCHAR(50))
+BEGIN
+SELECT entcom.numcom AS Commande, fournis.nomfou AS Fournisseur, produit.libart AS Produit, entcom.obscom AS Observation, SUM(qtecde*priuni) AS Total 
+FROM fournis 
+JOIN entcom 
+ON fournis.numfou=entcom.numfou 
+JOIN ligcom 
+ON entcom.numcom=ligcom.numcom 
+JOIN produit 
+ON produit.codart=ligcom.codart 
+WHERE entcom.obscom LIKE p_libelle 
+GROUP BY entcom.numcom, fournis.nomfou, produit.libart;
+END |
+DELIMITER ;

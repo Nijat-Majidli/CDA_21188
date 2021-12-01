@@ -1,0 +1,21 @@
+Réalisez les exercices suivants sur la base Papyrus que vous adorez tous :
+
+Exercice 1 : création d'une procédure stockée sans paramètre
+
+1.Créez la procédure stockée Lst_fournis correspondant à la requête n°2 afficher le code des fournisseurs pour lesquels une commande a été passée.
+DELIMITER |
+CREATE PROCEDURE Lst_fournis()
+BEGIN
+    SELECT DISTINCT numfou AS Fournisseurs FROM entcom;
+END |
+DELIMITER ;
+
+
+
+2.Exécutez la pour vérifier qu’elle fonctionne conformément à votre attente.
+CALL Lst_fournis();
+
+
+
+3.Exécutez la commande SQL suivante pour obtenir des informations sur cette procédure stockée :
+SHOW CREATE PROCEDURE Lst_fournis;
