@@ -1,0 +1,77 @@
+A partir de l'exemple suivant, créez les déclencheurs suivants :
+
+1. modif_reservation : interdire la modification des réservations (on autorise l'ajout et la suppression).
+DELIMITER $$
+CREATE TRIGGER modif_reservation 
+AFTER UPDATE 
+ON reservation
+    FOR EACH ROW
+    BEGIN
+    	SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Un problème est survenu. Mise à jour non autorisée !';
+END $$
+DELIMITER ;
+
+
+
+2.insert_reservation : interdire l'ajout de réservation pour les hôtels possédant déjà 10 réservations.
+
+DELIMITER $$
+CREATE TRIGGER insert_reservation
+AFTER INSERT
+ON reservation 
+	FOR EACH ROW
+	BEGIN
+		DECLARE id_chambre INT;
+		DECLARE id_hotel INT;
+    		DECLARE nombre_reservation INT;
+    		SET id_chambre=NEW.res_cha_id;
+    		SET id_hotel=(SELECT cha_hot_id FROM chambre WHERE cha_id=id_chambre);
+        	SET nombre_reservation = (SELECT COUNT(res_cha_id) FROM reservation JOIN chambre ON cha_id=res_cha_id WHERE cha_hot_id=id_hotel);
+        	IF nombre_reservation>10 THEN
+            	SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Rèservation hôtel non autorisée !';
+        	END IF;
+	END $$
+DELIMITER ;
+
+
+
+
+3.insert_reservation2 : interdire les réservations si le client possède déjà 3 réservations.
+
+DELIMITER $$
+CREATE TRIGGER insert_reservation_2
+AFTER INSERT
+ON reservation 
+	FOR EACH ROW
+	BEGIN
+		DECLARE id_client INT;
+    		DECLARE nombre_reservation INT;
+    		SET id_client=NEW.res_cli_id;
+        	SET nombre_reservation = (SELECT COUNT(res_id) FROM reservation WHERE res_cli_id=id_client);
+        	IF nombre_reservation>3 THEN
+            	SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Rèservation du client non autorisée !';
+        	END IF;
+	END $$
+DELIMITER ;
+
+
+
+
+
+4.insert_chambre : lors d'une insertion, on calcule le total des capacités des chambres pour l'hôtel, si ce total est supérieur à 50, on interdit l'insertion de la chambre.
+
+DELIMITER $$
+CREATE TRIGGER insert_chambre
+AFTER INSERT
+ON chambre 
+	FOR EACH ROW
+	BEGIN
+		DECLARE capacite_hotel INT;
+		SET capacite_hotel = (SELECT SUM(cha_capacite) FROM chambre WHERE cha_hot_id=NEW.cha_hot_id);
+        	IF capacite_hotel>50 THEN
+            	SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Insértion de la nouvelle chambre non autorisée !';
+        	END IF;
+	END $$
+DELIMITER ;
+
+
