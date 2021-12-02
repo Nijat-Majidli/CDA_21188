@@ -1,0 +1,24 @@
+Créer une table ARTICLES_A_COMMANDER avec les colonnes :
+CODART : Code de l'article, voir la table produit
+DATE : date du jour (par défaut)
+QTE : à calculer
+
+
+CREATE TABLE `articles_a_commander` (
+  `codart` char(4) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `qtecde` int(11) NOT NULL);
+  
+  
+  
+  
+Création d'un déclencheur AFTER UPDATE:
+Créer un déclencheur UPDATE sur la table produit : lorsque le stock physique devient inférieur ou égal au stock d'alerte, une nouvelle ligne est insérée dans la table ARTICLES_A_COMMANDER.
+Attention, il faut prendre en compte les quantités déjà commandées dans la table ARTICLES_A_COMMANDER .
+
+
+
+
+
+
+
