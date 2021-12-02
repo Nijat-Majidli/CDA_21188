@@ -1,6 +1,7 @@
 A partir de l'exemple suivant, créez les déclencheurs suivants :
 
 1. modif_reservation : interdire la modification des réservations (on autorise l'ajout et la suppression).
+
 DELIMITER $$
 CREATE TRIGGER modif_reservation 
 AFTER UPDATE 
