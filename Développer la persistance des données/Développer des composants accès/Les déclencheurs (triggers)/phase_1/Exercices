@@ -1,3 +1,5 @@
+Exercices 
+
 A partir de l'exemple suivant, créez les déclencheurs suivants :
 
 1. modif_reservation : interdire la modification des réservations (on autorise l'ajout et la suppression).
@@ -8,7 +10,7 @@ AFTER UPDATE
 ON reservation
     FOR EACH ROW
     BEGIN
-    	SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Un problème est survenu. Mise à jour non autorisée !';
+    	SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Mise à jour non autorisée !';
 END $$
 DELIMITER ;
 
@@ -37,7 +39,7 @@ DELIMITER ;
 
 
 
-3.insert_reservation2 : interdire les réservations si le client possède déjà 3 réservations.
+3.insert_reservation_2 : interdire les réservations si le client possède déjà 3 réservations.
 
 DELIMITER $$
 CREATE TRIGGER insert_reservation_2

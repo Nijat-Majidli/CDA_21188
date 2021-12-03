@@ -17,7 +17,22 @@ Créer un déclencheur UPDATE sur la table produit : lorsque le stock physique d
 Attention, il faut prendre en compte les quantités déjà commandées dans la table ARTICLES_A_COMMANDER .
 
 
-
+DELIMITER $$
+CREATE TRIGGER insert_articles_commander
+AFTER UPDATE  
+ON produit 
+	FOR EACH ROW
+	BEGIN
+	   DECLARE qte_deja_commande INT;
+	   SET qte_deja_commande = (SELECT qtecde FROM articles_a_commander WHERE codart=NEW.codart);
+	   IF qte_deja_commande IS NULL THEN
+	      SET qte_deja_commande = 0;
+	   END IF;
+	   IF NEW.stkphy < NEW.stkale THEN
+	      INSERT INTO articles_a_commander(codart, qtecde) VALUES(NEW.codart, (NEW.stkale-NEW.stkphy)-qte_deja_commande);
+	   END IF; 
+	END $$
+DELIMITER ;
 
 
 
