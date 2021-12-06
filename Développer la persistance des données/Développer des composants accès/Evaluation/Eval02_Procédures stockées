@@ -1,0 +1,47 @@
+Codez deux procédures stockées correspondant aux requêtes 9 et 10 de l'Evaluation1. 
+Les procédures stockées doivent prendre en compte les éventuels paramètres.
+
+
+DELIMITER |
+CREATE PROCEDURE dateDerniereCommande(IN p_client VARCHAR(50))
+BEGIN
+   SELECT orders.OrderDate AS `Date de derniere commande`
+   FROM orders, customers
+   WHERE orders.CustomerID=customers.CustomerID 
+   AND customers.CompanyName=p_client
+   ORDER BY `Date de derniere commande` DESC 
+   LIMIT 1;
+END |
+DELIMITER ;
+
+
+Appel de la procédure stockée en passant une valeur au paramètre p_client :
+CALL dateDerniereCommande('Du monde entier');
+CALL dateDerniereCommande('Alfreds Futterkiste');
+CALL dateDerniereCommande('Eastern Connection');
+etc.....
+
+
+
+
+
+
+DELIMITER |
+CREATE PROCEDURE delaiMoyenLivraisonParClient(IN p_clientID VARCHAR(50))
+BEGIN
+   SELECT ROUND(AVG(DATEDIFF(DATE(ShippedDate), DATE(OrderDate)))) AS `Délai moyen de livraison en jours` 
+   FROM orders
+   JOIN customers
+   ON customers.CustomerID=orders.CustomerID
+   WHERE orders.CustomerID=p_clientID;
+END |
+DELIMITER ;
+
+
+Appel de la procédure stockée en passant une valeur au paramètre p_clientID :
+CALL delaiMoyenLivraisonParClient('VINET');
+CALL delaiMoyenLivraisonParClient('HANAR');
+CALL delaiMoyenLivraisonParClient('WELLI');
+etc.....
+
+

@@ -55,8 +55,9 @@ HAVING CA > 30000
 ORDER BY CA DESC 
 
 
-Exercice6.
 
+
+6 – Liste des pays dont les clients ont passé commande de produits fournis par « Exotic Liquids » :
 SELECT customers.Country AS Pays
 FROM customers
 JOIN orders
@@ -72,31 +73,45 @@ GROUP BY Pays
 ORDER BY Pays ASC
 
 
-Exercice7.
 
+7 – Montant des ventes de 1997 :
 SELECT SUM(`order details`.UnitPrice*Quantity) AS Montant_Ventes_97
 FROM `order details`, orders
 WHERE orders.OrderID=`order details`.OrderID 
 AND orders.ShippedDate BETWEEN '1997/01/01' AND '1997/12/31'
 
 
-Exercice8.
 
-SELECT MONTH(orders.ShippedDate) AS Mois,  SUM(`order details`.UnitPrice*Quantity) AS Montant_Ventes_97
+8 – Montant des ventes de 1997 mois par mois :
+SELECT MONTH(orders.ShippedDate) AS `Mois 97`,  SUM(`order details`.UnitPrice*Quantity) AS `Montant Ventes`
 FROM `order details`, orders
 WHERE orders.OrderID=`order details`.OrderID 
 AND orders.ShippedDate BETWEEN '1997/01/01' AND '1997/12/31' 
-GROUP BY Mois
-HAVING Mois BETWEEN '01' AND '12'
+GROUP BY `Mois 97`
+HAVING `Mois 97` BETWEEN '01' AND '12'
  
 
-Exercice9.
 
-SELECT orders.OrderDate AS Date_de_derniere_commande
+9 – Depuis quelle date le client « Du monde entier » n’a plus commandé ?
+SELECT orders.OrderDate AS `Date de derniere commande`
 FROM orders, customers
 WHERE orders.CustomerID=customers.CustomerID 
 AND customers.CompanyName="Du monde entier"
-ORDER BY Date_de_derniere_commande DESC 
+ORDER BY `Date de derniere commande` DESC 
 LIMIT 1
+
+
+
+
+10 – Quel est le délai moyen de livraison en jours ?
+SELECT ROUND(AVG(DATEDIFF(DATE(ShippedDate), DATE(OrderDate)))) AS `Délai moyen de livraison en jours` FROM orders
+
+
+
+
+
+
+
+
 
 

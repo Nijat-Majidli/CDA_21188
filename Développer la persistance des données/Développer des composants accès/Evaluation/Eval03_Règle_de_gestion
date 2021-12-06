@@ -1,0 +1,14 @@
+Mise en place d'une règle de gestion
+
+Décrivez par quel moyen et comment vous pourriez implémenter la règle de gestion suivante:
+Pour tenir compte des coûts liés au transport, on vérifiera que pour chaque produit d’une commande, le client réside dans le même pays que le fournisseur du même produit.
+
+SELECT `order details`.OrderID AS Commande, products.ProductName AS Produit, customers.CompanyName AS Client, suppliers.CompanyName AS Fournisseur, 
+customers.Country AS `Pays client`, suppliers.Country AS `Pays fournisseur` 
+FROM `order details`, orders, customers, products, suppliers 
+WHERE `order details`.OrderID=orders.OrderID
+AND customers.CustomerID=orders.CustomerID
+AND `order details`.ProductID=products.ProductID
+AND products.SupplierID=suppliers.SupplierID
+GROUP BY Produit
+HAVING `Pays client`=`Pays fournisseur`;
