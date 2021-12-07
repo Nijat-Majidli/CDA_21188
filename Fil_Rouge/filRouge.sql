@@ -6,12 +6,12 @@ USE `filRouge`;
 CREATE TABLE categories(
    cat_id INT,
    cat_nom VARCHAR(50) NOT NULL,
-   cat_id_parent INT,
+   cat_parent_id INT,
    PRIMARY KEY(cat_id),
-   FOREIGN KEY(cat_id_parent) REFERENCES Categories(cat_id)
+   FOREIGN KEY(cat_parent_id) REFERENCES categories(cat_id)
 );
 
-INSERT INTO `categories` (`cat_id`, `cat_nom`, `cat_parent`) VALUES
+INSERT INTO `categories` (`cat_id`, `cat_nom`, `cat_parent_id`) VALUES
 (1, 'Guit/Bass', NULL),
 (2, 'Batteries', NULL),
 (3, 'Clavier', NULL),
@@ -28,7 +28,10 @@ INSERT INTO `categories` (`cat_id`, `cat_nom`, `cat_parent`) VALUES
 (14, 'Basses acoustiques', 1),
 (15, 'Batteries Acous­tiques', 2),
 (16, 'Batteries Electtroniques', 2),
-(17, 'Cymbales', 2);
+(17, 'Cymbales', 2),
+(18, 'Ba­guettes & Maillets', 2),
+(19, 'Cla­viers Ar­ran­geurs', 3),
+(20, 'Cla­viers Maîtres', 3);
 
 	
 
@@ -43,17 +46,20 @@ CREATE TABLE produit(
    pro_stock INT,
    cat_id INT NOT NULL,
    PRIMARY KEY(pro_id),
-   FOREIGN KEY(cat_id) REFERENCES Categories(cat_id)
+   FOREIGN KEY(cat_id) REFERENCES categories(cat_id)
 );
 
-INSERT INTO `produit` (`pro_id`, `pro_libelle`, `pro_description`, `prix_achat`, `Taux_TVA`, `prix_vente`, `pro_photo`, `pro_stock`, `cat_id`) VALUES 
+INSERT INTO `produit` (`pro_id`, `pro_libelle`, `pro_description`, `prix_achat_HT`, `Taux_TVA`, `prix_vente`, `pro_photo`, `pro_stock`, `cat_id`) VALUES 
 (1, 'Harley Benton', 'Guitare électrique, Harley Benton ST-20HSS CA Standard Set 1', 100, 20, 179, 'jpg', 5, 10),
 (2, 'Thomann Guitar', 'Guitare électrique, Thomann Guitar Set G13 White', 70, 20, 149, 'jpg', 2, 10),
 (3, 'Fender', 'Guitare électrique, Fender SQ Aff. Strat HSS MN PACK LPB', 150, 20, 299, 'jpg', 1, 10),
 (4, 'Startone', 'Guitare classique, Startone CG 851 1/8', 10, 20, 37, 'jpg', 15, 11),
 (5, 'Yamaha', 'Guitare classique, Yamaha GL1 Tobacco Brown Sunburst', 25, 20, 88, 'jpg', 8, 11),
 (6, 'La Mancha', 'Guitare classique, La Mancha Rubinito CM/47', 100, 20, 211, 'jpg', 6, 11),
-(6, 'Ortega', 'Guitare classique, Ortega R122-1/4', 60, 20, 145, 'jpg', 4, 11);
+(7, 'Ortega', 'Guitare classique, Ortega R122-1/4', 60, 20, 145, 'jpg', 4, 11),
+(8, 'Epiphone', 'Guitares Acous­tiques & Elec­tro-Acous­tiques, Epiphone J-15 EC Deluxe NA', 160, 20, 258, 'jpg', 2, 12),
+(9, 'Baton Rouge', 'Guitares Acous­tiques & Elec­tro-Acous­tiques, Baton Rouge X11LS/D-W-SCC', 99, 20, 195, 'jpg', 7, 12),
+(10, 'Gibson', 'Guitares Acous­tiques & Elec­tro-Acous­tiques, Gibson G-45 Natural Generation', 700, 20, 1088, 'jpg', 3, 12);
 
 
 
@@ -85,20 +91,20 @@ CREATE TABLE client(
    cli_coefficient DECIMAL(2,2),
    commercial_id INT NOT NULL,
    PRIMARY KEY(cli_référence),
-   FOREIGN KEY(commercial_id) REFERENCES Commercial(commercial_id)
+   FOREIGN KEY(commercial_id) REFERENCES commercial(commercial_id)
 );
 
 INSERT INTO `client` (`cli_référence`, `cli_nom`, `cli_prenom`, `cli_categorie`, `cli_tel`, `cli_email`, `cli_mdp`, `cli_coefficient`, `commercial_id`) VALUES 
-(1, 'Richard', 'Jules', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.2, 2),
-(2, 'Durand', 'Adam', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.15, 3),
-(3, 'Dubois', 'Lucas', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.1, 4),
-(4, 'Moreau', 'Hugo', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.2, 2),
-(5, 'Laurent', 'Gabin', 'particulier', 0751250810, nijatmajidli@gmail.com, 12345, 0.3, 1),
-(6, 'Simon', 'Paul', 'particulier', 0751250810, nijatmajidli@gmail.com, 12345, 0.2, 1),
-(7, 'Michel', 'Nathan', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.1, 2),
-(8, 'Lefebvre', 'Leon', 'particulier', 0751250810, nijatmajidli@gmail.com, 12345, 0.15, 1),
-(9, 'Leroy', 'Marius', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.3, 5),
-(10, 'Roux', 'Victor', 'professionnel', 0751250810, nijatmajidli@gmail.com, 12345, 0.25, 3);
+(1, 'Richard', 'Jules', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.2, 2),
+(2, 'Durand', 'Adam', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.15, 3),
+(3, 'Dubois', 'Lucas', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.1, 4),
+(4, 'Moreau', 'Hugo', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.2, 2),
+(5, 'Laurent', 'Gabin', 'particulier', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.3, 1),
+(6, 'Simon', 'Paul', 'particulier', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.2, 1),
+(7, 'Michel', 'Nathan', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.1, 2),
+(8, 'Lefebvre', 'Leon', 'particulier', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.15, 1),
+(9, 'Leroy', 'Marius', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.3, 5),
+(10, 'Roux', 'Victor', 'professionnel', 0751250810, 'nijatmajidli@gmail.com', 12345, 0.25, 3);
 
 
 
@@ -110,14 +116,15 @@ CREATE TABLE commande(
    date_facturation DATE,
    cli_référence INT NOT NULL,
    PRIMARY KEY(com_id),
-   FOREIGN KEY(cli_référence) REFERENCES Client(cli_référence)
+   FOREIGN KEY(cli_référence) REFERENCES client(cli_référence)
 );
 
 INSERT INTO `commande` (`com_id`, `com_date`, `mode_paiement`, `expedition`, `date_facturation`, `cli_référence`) VALUES 
-(1, '2021-10-21', 'en différé', 'partiellement', '2021-10-30', 1),
-(1, '2021-10-21', 'en différé', 'partiellement', '2021-10-30', 2),
-(1, '2021-10-21', 'en différé', 'partiellement', '2021-10-30', 3),
-(1, '2021-10-21', 'à la commande', 'complet', '2021-10-30', 5);
+(1, '2021-10-21', 'en différé', 'partiellement', '2021-11-05', 1),
+(2, '2021-09-11', 'en différé', 'partiellement', '2021-09-10', 2),
+(3, '2021-08-05', 'en différé', 'partiellement', '2021-09-01', 3),
+(4, '2021-07-18', 'à la commande', 'complet', '2021-08-11', 5),
+(5, '2021-07-23', 'à la commande', 'complet', '2021-08-11', 6);
 
 
 
@@ -130,12 +137,20 @@ CREATE TABLE adresse(
    pays VARCHAR(50) NOT NULL,
    cli_référence INT NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(cli_référence) REFERENCES Client(cli_référence)
+   FOREIGN KEY(cli_référence) REFERENCES client(cli_référence)
 );
 
 INSERT INTO `adresse` (`id`, `type`, `adresse`, `code_postal`, `ville`, `pays`, `cli_référence`) VALUES 
-(),
-
+(1, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 1),
+(2, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 2),
+(3, 'livraison', '4 rue Richard Wagner', '60100', 'Creil', 'France', 3),
+(4, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 4),
+(5, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 5),
+(6, 'livraison', '4 rue Richard Wagner', '60100', 'Creil', 'France', 6),
+(7, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 7),
+(8, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 8),
+(9, 'livraison', '4 rue Richard Wagner', '60100', 'Creil', 'France', 9),
+(10, 'facturation', '4 rue Richard Wagner', '60100', 'Creil', 'France', 10);
 
 
 
@@ -145,8 +160,8 @@ CREATE TABLE concerne(
    quantité INT,
    remise INT,
    PRIMARY KEY(pro_id, com_id),
-   FOREIGN KEY(pro_id) REFERENCES Produit(pro_id),
-   FOREIGN KEY(com_id) REFERENCES Commande(com_id)
+   FOREIGN KEY(pro_id) REFERENCES produit(pro_id),
+   FOREIGN KEY(com_id) REFERENCES commande(com_id)
 );
 
 
@@ -154,8 +169,8 @@ CREATE TABLE facture(
    com_id INT,
    id INT,
    PRIMARY KEY(com_id, id),
-   FOREIGN KEY(com_id) REFERENCES Commande(com_id),
-   FOREIGN KEY(id) REFERENCES Adresse(id)
+   FOREIGN KEY(com_id) REFERENCES commande(com_id),
+   FOREIGN KEY(id) REFERENCES adresse(id)
 );
 
 
@@ -163,8 +178,8 @@ CREATE TABLE livre(
    com_id INT,
    id INT,
    PRIMARY KEY(com_id, id),
-   FOREIGN KEY(com_id) REFERENCES Commande(com_id),
-   FOREIGN KEY(id) REFERENCES Adresse(id)
+   FOREIGN KEY(com_id) REFERENCES commande(com_id),
+   FOREIGN KEY(id) REFERENCES adresse(id)
 );
 
 
