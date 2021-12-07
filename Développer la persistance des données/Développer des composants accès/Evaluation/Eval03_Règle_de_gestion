@@ -1,14 +1,40 @@
 Mise en place d'une règle de gestion
 
-Décrivez par quel moyen et comment vous pourriez implémenter la règle de gestion suivante:
-Pour tenir compte des coûts liés au transport, on vérifiera que pour chaque produit d’une commande, le client réside dans le même pays que le fournisseur du même produit.
+L'entreprise souhaite mettre en place cette règle de gestion:
 
-SELECT `order details`.OrderID AS Commande, products.ProductName AS Produit, customers.CompanyName AS Client, suppliers.CompanyName AS Fournisseur, 
-customers.Country AS `Pays client`, suppliers.Country AS `Pays fournisseur` 
-FROM `order details`, orders, customers, products, suppliers 
-WHERE `order details`.OrderID=orders.OrderID
-AND customers.CustomerID=orders.CustomerID
-AND `order details`.ProductID=products.ProductID
-AND products.SupplierID=suppliers.SupplierID
-GROUP BY Produit
-HAVING `Pays client`=`Pays fournisseur`;
+Pour tenir compte des coûts liés au transport, on vérifiera que pour chaque produit d’une commande, le client réside dans le même pays que le fournisseur du même produit.
+Il s'agit d'interdire l'insertion de produits dans les commandes ne satisfaisants pas à ce critère.
+Décrivez par quel moyen et avec quels outils (procédures stockées, trigger...) vous pourriez implémenter la règle de gestion suivante.
+
+
+DELIMITER $$
+CREATE TRIGGER paysClientpaysFournisseur
+AFTER INSERT 
+ON `order details`
+FOR EACH ROW
+  BEGIN
+     DECLARE p_existe varchar(50); 
+     SET p_existe = (SELECT `order details`.ProductID
+                     FROM `order details`
+                     JOIN orders
+                     ON `order details`.OrderID=orders.OrderID
+                     JOIN customers
+                     ON customers.CustomerID=orders.CustomerID
+                     JOIN products
+                     ON `order details`.ProductID=products.ProductID
+                     JOIN suppliers 
+                     ON products.SupplierID=suppliers.SupplierID
+                     WHERE `order details`.OrderID=NEW.OrderID
+                     AND `order details`.ProductID=NEW.ProductID
+                     AND customers.Country=suppliers.Country); 
+     IF ISNULL(p_existe) 
+       THEN  
+         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Les pays de client et fournisseur ne correspondent pas';
+     END IF;
+  END $$
+DELIMITER ;
+     
+     
+
+
+
