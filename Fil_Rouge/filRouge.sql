@@ -121,11 +121,18 @@ CREATE TABLE commande(
 );
 
 INSERT INTO `commande` (`com_id`, `com_date`, `mode_paiement`, `expedition`, `date_facturation`,  `date_livraison`, `cli_référence`) VALUES 
-(1, '2021-10-21', 'en différé', 'partiellement', '2021-10-25', '2021-11-01', 1),
-(2, '2021-09-11', 'en différé', 'partiellement', '2021-09-15', '2021-09-18', 2),
-(3, '2021-08-05', 'en différé', 'partiellement', '2021-08-10', '2021-08-15', 3),
-(4, '2021-07-18', 'à la commande', 'complet', '2021-07-23', '2021-07-25', 5),
-(5, '2021-07-23', 'à la commande', 'complet', '2021-07-26', '2021-07-31', 6);
+(1, '2021-06-03', 'en différé', 'complet', '2021-06-06', '2021-06-12', 1),
+(2, '2021-07-23', 'en différé', 'complet', '2021-07-26', '2021-07-31', 2),
+(3, '2021-07-18', 'en différé', 'complet', '2021-07-23', '2021-07-25', 3),
+(4, '2021-08-05', 'en différé', 'complet', '2021-08-10', '2021-08-15', 4),
+(5, '2021-09-11', 'à la commande', 'complet', '2021-09-11', '2021-09-14', 5),
+(6, '2021-10-06', 'à la commande', 'complet', '2021-10-06', '2021-10-07', 6),
+(7, '2021-10-21', 'en différé', 'partiellement', '2021-10-30', NULL, 7),
+(8, '2021-11-02', 'à la commande', 'partiellement', '2021-11-02', NULL, 8);
+
+
+
+
 
 
 
