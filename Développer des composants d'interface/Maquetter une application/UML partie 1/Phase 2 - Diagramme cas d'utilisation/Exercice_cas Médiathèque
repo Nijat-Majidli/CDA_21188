@@ -8,7 +8,6 @@ Identifiez les acteurs:
 
 Ensuite vous identifiez les différents cas d'usage sur le cas Médiathèque:
 - Consulter documents; 
-- Emprunter documents;
 - Acheter nouveaux documents;
 - Inscrire nouveaux usagers;
 - Prêter documents;
@@ -20,3 +19,5 @@ Ensuite vous identifiez les différents cas d'usage sur le cas Médiathèque:
 
 
 Ecrivez le scénario principal et les scénarios alternatifs pour le cas d'usage qui concerne l'emprunt d'une ressource.
+- Usager consulte la liste des documents.
+- 
