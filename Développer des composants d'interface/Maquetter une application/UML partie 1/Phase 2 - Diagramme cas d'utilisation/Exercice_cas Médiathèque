@@ -25,5 +25,10 @@ Ensuite vous identifiez les différents cas d'usage sur le cas Médiathèque:
 
 
 Ecrivez le scénario principal et les scénarios alternatifs pour le cas d'usage qui concerne l'emprunt d'une ressource.
-- Usager consulte la liste des documents.
-- 
+- Usager arrive à la bibliothèque.
+- Il saisit son numéro de carte lecteur sur un poste informatique afin de consulter la liste des documents et leurs disponibilités.
+- Il désire emprunter chez lui un CD-Rom, deux livres et un microfilm.
+- Usager va chercher les livres directement dans le rayonnage où il est rangé pour les livres et les journaux.
+- Ensuite il s'approche d'un guichet pour emprunter le CD-ROM et le microfilm.
+- Le CD-ROM lui est remis en échange d'une caution, après qu'il ait présenté sa carte de lecteur. 
+- Puis 
