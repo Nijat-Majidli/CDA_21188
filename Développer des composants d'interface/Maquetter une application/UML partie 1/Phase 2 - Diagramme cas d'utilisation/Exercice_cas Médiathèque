@@ -1,19 +1,25 @@
 A partir du cas Médiathèque
 
 Identifiez les acteurs:
-- Usager;
+- Lecteur;
 - Personnel de la bibliothèque;
-- Bénévole
+- Bénévole.
 
 
 Ensuite vous identifiez les différents cas d'usage sur le cas Médiathèque:
-- Consulter documents; 
-- Acheter nouveaux documents;
-- Inscrire nouveaux usagers;
+- Consulter document; 
+- Consulter disponibilité document;
+- Saisir numéro carte lecteur; 
+- Enregistrer nouveau document;
+- Incrémenter côte document;
+- Inscrire nouveau usager;
+- Incrémenter numéro lecteur;
 - Prêter documents;
-- Enregistrer documents prêté;
-- Modifier fiches usagers;
-- Mettre hors service documents;
+- Enregistrer numéro lecteur et côte document;
+- Enregistrer caution;
+- Vérifier disponibilité écran;
+- Modifier adresse usager;
+- Mettre hors service documents perdu ou volés;
 - Relancer usagers;
 - Consulter état usagers.
 
