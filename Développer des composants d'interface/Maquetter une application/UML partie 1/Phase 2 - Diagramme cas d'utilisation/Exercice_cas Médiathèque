@@ -29,6 +29,10 @@ Ecrivez le scénario principal et les scénarios alternatifs pour le cas d'usage
 - Il saisit son numéro de carte lecteur sur un poste informatique afin de consulter la liste des documents et leurs disponibilités.
 - Il désire emprunter chez lui un CD-Rom, deux livres et un microfilm.
 - Usager va chercher les livres directement dans le rayonnage où il est rangé pour les livres et les journaux.
-- Ensuite il s'approche d'un guichet pour emprunter le CD-ROM et le microfilm.
-- Le CD-ROM lui est remis en échange d'une caution, après qu'il ait présenté sa carte de lecteur. 
-- Puis 
+- Ensuite il s'approche d'un guichet et présente sa carte lecteur pour emprunter le CD-ROM et le microfilm.
+- L'employé de la bibliothèque saisit le n° carte lecteur dans le système informatique.
+- Le CD-ROM est remis à lecteur en échange d'une caution. 
+- Puis l'employé de la bibliothèque vérifie la disponibilité d'un écran de lecture.
+- Il y a un écran libre, donc l'employé de la bibliothèque lui prête le microfilm.
+- Scénario alternatif: Il n'y a pas un écran libre, donc l'employé de la bibliothèque ne lui prête pas le microfilm.
+- L'employé de la bibliothèque enregistre n° carte lecteur, la côte des documents empruntés qui génère une fiche de prêt dans le système informatique .
